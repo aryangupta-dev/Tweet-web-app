@@ -3,7 +3,8 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {fontFamily:{
-      staatliches:['"Staatliches"', '"cursive"']
+      staatliches:['"Staatliches"', '"cursive"'],
+      nunito:['"Nunito"','"sans-serif"'],
     },},
   },
   variants: {

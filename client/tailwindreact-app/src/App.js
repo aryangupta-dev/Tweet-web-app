@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Headbar from "./Component/Headbar";
 import Home from "./pages/Home";
 import Post from "./pages/Post";
+import Registration from "./pages/Registration";
 
 import TwitSupport from "./pages/TwitSupport";
 
@@ -21,6 +22,9 @@ function App() {
           <Route path="/posts">
             <Headbar />
             <Home />
+          </Route>
+          <Route path="/auth">
+            <Registration/>
           </Route>
           <Route path="/post/:id" exact>
             <Headbar/>
