@@ -6,6 +6,8 @@ app.use(cors());
 app.use(express.json());
 const db=require('./models');
 const bcrypt=require("bcrypt");
+const { default: validateToken } = require("./middlewares/AuthMiddleware");
+const {sign}=require("jsonwebtoken");
 
 
 
@@ -31,7 +33,7 @@ app.get("/posts/byId/:id", async (req, res) => {
   });
 
   //comments database api
-app.post("/comments",async  (req,res)=>{
+app.post("/comments",validateToken,async  (req,res)=>{
     const comment=req.body;
 
     await Comments.create(comment);
@@ -66,10 +68,13 @@ app.post("/auth/login",async (req,res)=>{
     if(!user){
         res.json({error:"User not found"});
     }else{
-        bcrypt.compare(password,user.password).then((match)=>{
+        bcrypt.compare(password,user.password).then(async(match)=>{
             if(!match){
                 res.json({error:"Password is incorrect"});
             }else{
+                const accessToken=sign({
+                    username:user.username
+                })
                 res.json("You are logged in ");
             }
         })
