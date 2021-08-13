@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Headbar from "./Component/Headbar";
 import Home from "./pages/Home";
+import Login from "./pages/Login";
 import Post from "./pages/Post";
 import Registration from "./pages/Registration";
 
@@ -23,9 +24,10 @@ function App() {
             <Headbar />
             <Home />
           </Route>
-          <Route path="/auth">
+          <Route path="/auth" exact>
             <Registration/>
           </Route>
+          <Route path="/auth/login" exact><Login/></Route>
           <Route path="/post/:id" exact>
             <Headbar/>
             <Post/>

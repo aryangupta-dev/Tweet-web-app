@@ -1,17 +1,19 @@
-const verify=require("jsonwebtoken");
+const { verify } = require("jsonwebtoken");
 
-function validateToken(req,res,next){
-    const accessToken=req.header("accessToken");
-    if(!accessToken){
-        return res.json({error:"You must be logged in."})
+const validateToken = (req, res, next) => {
+  const accessToken = req.header("accessToken");
+
+  if (!accessToken) return res.json({ error: "User not logged in!" });
+
+  try {
+    const validToken = verify(accessToken, "klanaakl");
+
+    if (validToken) {
+      return next();
     }
-    try{
-        const valid=verify(accessToken,"klanaakl");
-        if(valid){
-            return next();
-        }
-    }catch(err){
-        return res.json({error:err})
-    }
-}
-export default validateToken;
+  } catch (err) {
+    return res.json({ error: err });
+  }
+};
+
+module.exports = { validateToken };

@@ -34,7 +34,7 @@ function Registration() {
     username: Yup.string().min(3).max(15).required("You must enter a username"),
   });
   return (
-    <div className="flex flex-col bg-blue-300 sm:h-screen xs:h-full md:flex-row">
+    <div className="flex flex-col h-screen bg-blue-300 md:flex-row">
       <h1 className="mx-auto mr-5 text-white md:border-t-2 md:border-b-2 sm:p-10 lg:max-w-lg md:max-w-md text-7xl lg:text-8xl md:ml-20 lg:ml-30 md:my-auto xs:mt-20 broder-white xs:mb-5 font-nunito">
         Tweet <span className="text-black hover:text-pink-500">with  the </span>world.
       </h1>
@@ -50,10 +50,10 @@ function Registration() {
             <img
               src="https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/128/Twitter_NEW.png"
               alt="twitterlogo"
-              className=""
+              className="animate-pulse"
             />
           </div>
-          <h1 className="mx-auto text-2xl text-purple-600 font-nunito">Sign up</h1>
+          <h1 className="mx-auto text-2xl text-purple-600 font-nunito ">Sign up</h1>
           <label className="font-sans text-xl text-white">Username</label>
           <ErrorMessage
             name="username"
@@ -94,7 +94,6 @@ function Registration() {
             Submit
           </button>
           <span className="mx-auto mt-1 text-white align-baseline">
-            {" "}
             © 2021 All Rights Reserved.
           </span>
         </Form>

@@ -5,8 +5,8 @@ const cors=require("cors");
 app.use(cors());
 app.use(express.json());
 const db=require('./models');
+const { validateToken } = require("./middlewares/AuthMiddleware");
 const bcrypt=require("bcrypt");
-const { default: validateToken } = require("./middlewares/AuthMiddleware");
 const {sign}=require("jsonwebtoken");
 
 
@@ -73,13 +73,13 @@ app.post("/auth/login",async (req,res)=>{
                 res.json({error:"Password is incorrect"});
             }else{
                 const accessToken=sign({
-                    username:user.username
-                })
-                res.json("You are logged in ");
+                    username:user.username,id:user.id
+                },"klaanakl");
+                res.json(accessToken);
             }
-        })
+        });
     }
-})
+});
 db.sequelize.sync().then(()=>{
     app.listen(3001,function(){
         console.log("Server is running on port 3001");
