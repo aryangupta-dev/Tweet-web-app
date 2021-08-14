@@ -15,28 +15,33 @@ function Post() {
           headers: {
             accessToken: sessionStorage.getItem("accessToken"),
           },
-        }
+        },
       )
       .then((response) => {
-        const commentToAdd = { commentBody: newComment };
-        setComments([...comments, commentToAdd]);
-        setNewComment("");
+        if (response.data.error) {
+          
+          console.log(response.data.error);
+        } else {
+          const commentToAdd = { comment: newComment };
+          setComments([...comments, commentToAdd]);
+          setNewComment("");
+        }
       });
   };
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
-      console.log(response.data);
+     
     });
     axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
   }, [newComment]);
   return (
-    <div className="flex flex-row ">
-      <div className="w-1/2 min-h-screen bg-gray-900">
-        <div className="flex flex-col max-w-sm px-3 py-10 m-auto bg-white rounded-lg">
+    <div className="flex flex-col md:flex-row ">
+      <div className="min-h-full p-10 bg-gray-900 md:w-1/2 md:min-h-screen">
+        <div className="flex flex-col max-w-sm px-3 py-10 m-auto my-auto bg-white rounded-lg">
           <div className="flex flex-row text-gray-600 border-b border-gray-300">
             <img
               src="https://image.flaticon.com/icons/png/16/733/733579.png"
@@ -51,8 +56,8 @@ function Post() {
           <div className="mt-2 text-gray-400">{postObject.createdAt}</div>
         </div>
       </div>
-      <div className="w-1/2 min-h-screen ">
-        <h1 className="mt-2 ml-2 font-mono text-2xl text-gray-700">
+      <div className="flex flex-col items-start w-1/2 min-h-full md:min-h-screen">
+        <h1 className="px-4 py-2 mt-2 ml-2 font-mono text-base text-gray-700 border border-black rounded-lg md:text-2xl ">
           Comment Section
         </h1>
         <div className="flex flex-col items-center">
@@ -64,9 +69,9 @@ function Post() {
             );
           })}
         </div>
-        <div className="fixed flex flex-row justify-around mt-8 bottom-5">
+        <div className="flex flex-row justify-around mt-8 sm:fixed bottom-5">
           <input
-            className="px-8 py-2 ml-4 mr-3 border border-gray-500 rounded-md"
+            className="px-5 py-2 ml-4 mr-3 border border-gray-500 rounded-md sm:px-8"
             placeholder="Comment..."
             onChange={(event) => {
               setNewComment(event.target.value);

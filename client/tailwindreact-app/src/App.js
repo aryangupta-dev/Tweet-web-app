@@ -14,7 +14,7 @@ function App() {
       <BrowserRouter>
         <Switch>
           <Route path="/" exact>
-            <Redirect to="/posts"></Redirect>
+            <Redirect to="/auth/login"></Redirect>
           </Route>
           <Route path="/twitsupport">
             <Headbar />

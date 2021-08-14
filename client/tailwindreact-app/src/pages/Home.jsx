@@ -19,7 +19,7 @@ function Home() {
         return (
           <div
             key={key}
-            className="flex flex-col px-3 py-3 mx-3 my-3 bg-white rounded-lg md:flex-wrap flex-nowrap"
+            className="flex flex-col px-3 mx-3 my-3 bg-white rounded-lg py-7 md:flex-wrap flex-nowrap"
             onClick={() => {
               history.push(`/post/${value.id}`);
             }}

@@ -5,7 +5,7 @@ const cors=require("cors");
 app.use(cors());
 app.use(express.json());
 const db=require('./models');
-const { validateToken } = require("./middlewares/AuthMiddleware");
+const {validateToken}=require("./middlewares/validateToken")
 const bcrypt=require("bcrypt");
 const {sign}=require("jsonwebtoken");
 
@@ -33,9 +33,8 @@ app.get("/posts/byId/:id", async (req, res) => {
   });
 
   //comments database api
-app.post("/comments",validateToken,async  (req,res)=>{
+app.post("/comments",async  (req,res)=>{
     const comment=req.body;
-
     await Comments.create(comment);
     res.json(comment);
 });
@@ -72,9 +71,10 @@ app.post("/auth/login",async (req,res)=>{
             if(!match){
                 res.json({error:"Password is incorrect"});
             }else{
+                
                 const accessToken=sign({
                     username:user.username,id:user.id
-                },"klaanakl");
+                },"secret");
                 res.json(accessToken);
             }
         });
