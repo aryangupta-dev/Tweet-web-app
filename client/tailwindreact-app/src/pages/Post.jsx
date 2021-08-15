@@ -41,7 +41,7 @@ function Post() {
   return (
     <div className="flex flex-col md:flex-row ">
       <div className="min-h-full p-10 bg-gray-900 md:w-1/2 md:min-h-screen">
-        <div className="flex flex-col max-w-sm px-3 py-10 m-auto my-auto bg-white rounded-lg">
+        <div className="flex flex-col max-w-sm px-5 py-10 mx-auto bg-white rounded-lg md:px-3 md:mt-16 md:fixed lg:ml-16 sm:l-5">
           <div className="flex flex-row text-gray-600 border-b border-gray-300">
             <img
               src="https://image.flaticon.com/icons/png/16/733/733579.png"
@@ -69,7 +69,7 @@ function Post() {
             );
           })}
         </div>
-        <div className="flex flex-row justify-around mt-8 sm:fixed bottom-5">
+        <div className="flex flex-col justify-around mt-8 sm:flex-row sm:fixed bottom-5">
           <input
             className="px-5 py-2 ml-4 mr-3 border border-gray-500 rounded-md sm:px-8"
             placeholder="Comment..."
@@ -80,7 +80,7 @@ function Post() {
             type="text"
           ></input>
           <button
-            className="px-3 py-2 text-white bg-blue-600 rounded-md "
+            className="px-2 py-2 mt-5 ml-4 text-white bg-blue-600 rounded-md "
             type="submit"
             onClick={addComment}
           >

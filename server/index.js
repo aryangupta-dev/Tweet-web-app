@@ -5,7 +5,7 @@ const cors=require("cors");
 app.use(cors());
 app.use(express.json());
 const db=require('./models');
-const {validateToken}=require("./middlewares/validateToken")
+const {validateToken}=require("./middlewares/AuthMiddleware")
 const bcrypt=require("bcrypt");
 const {sign}=require("jsonwebtoken");
 
@@ -33,7 +33,7 @@ app.get("/posts/byId/:id", async (req, res) => {
   });
 
   //comments database api
-app.post("/comments",async  (req,res)=>{
+app.post("/comments",validateToken,async  (req,res)=>{
     const comment=req.body;
     await Comments.create(comment);
     res.json(comment);
@@ -66,19 +66,19 @@ app.post("/auth/login",async (req,res)=>{
     const user= await Users.findOne({where:{username:username}});
     if(!user){
         res.json({error:"User not found"});
-    }else{
+    }
         bcrypt.compare(password,user.password).then(async(match)=>{
             if(!match){
                 res.json({error:"Password is incorrect"});
-            }else{
+            }
                 
                 const accessToken=sign({
                     username:user.username,id:user.id
                 },"secret");
                 res.json(accessToken);
-            }
+            
         });
-    }
+    
 });
 db.sequelize.sync().then(()=>{
     app.listen(3001,function(){

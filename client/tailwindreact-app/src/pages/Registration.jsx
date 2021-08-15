@@ -34,6 +34,7 @@ function Registration() {
     username: Yup.string().min(3).max(15).required("You must enter a username"),
   });
   return (
+    <div>
     <div className="flex flex-col h-screen bg-blue-300 md:flex-row">
       <h1 className="mx-auto mr-5 text-white md:border-t-2 md:border-b-2 sm:p-10 lg:max-w-lg md:max-w-md text-7xl lg:text-8xl md:ml-20 lg:ml-30 md:my-auto xs:mt-20 broder-white xs:mb-5 font-nunito">
         Tweet <span className="text-black hover:text-pink-500">with  the </span>world.
@@ -45,7 +46,7 @@ function Registration() {
         onSubmit={OnSubmit}
         validationSchema={validationSchema}
       >
-        <Form className="flex flex-col px-12 py-8 m-auto bg-gray-900 rounded-lg shadow-2xl lg:fixed lg:px-28 sm:px-20 sm:py-8 lg:my-auto md:right-12 lg:right-16 sm:top-16">
+        <Form className="flex flex-col px-12 py-8 m-auto bg-gray-900 rounded-lg shadow-2xl lg:px-28 sm:px-20 sm:py-8 lg:my-auto md:right-12 lg:right-16 sm:top-16">
           <div className="hidden mx-auto md:flex">
             <img
               src="https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/128/Twitter_NEW.png"
@@ -98,6 +99,17 @@ function Registration() {
           </span>
         </Form>
       </Formik>
+      </div>
+      <div className="flex flex-col-reverse items-center py-10 sm:flex-col">
+      <img
+          className="hidden mb-5 sm:flex animate-bounce"
+          src="https://image.flaticon.com/icons/png/32/545/545678.png"
+          alt="kcnjnxjm"
+        />
+        <button className="px-10 py-3 text-white bg-yellow-400" onClick={()=>history.push("/auth/login")}>Log In</button>
+      <h1 className="p-5 text-5xl border-yellow-500 sm:border-b-2 md:text-6xl font-staatliches">Already register with us</h1>
+
+      </div>
     </div>
   );
 }
