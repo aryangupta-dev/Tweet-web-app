@@ -19,8 +19,10 @@ app.get("/posts", async function(req,res){
    const listofPosts= await Posts.findAll();
    res.json(listofPosts);
 });
-app.post("/posts",async function(req,res){
+app.post("/posts",validateToken, async function(req,res){
     const post=req.body;
+    const username=req.user.username;
+    post.username=username;
     await Posts.create(post);
     res.json(post);
 });
@@ -35,6 +37,8 @@ app.get("/posts/byId/:id", async (req, res) => {
   //comments database api
 app.post("/comments",validateToken,async  (req,res)=>{
     const comment=req.body;
+    const username=req.user.username;
+    comment.username=username;
     await Comments.create(comment);
     res.json(comment);
 });

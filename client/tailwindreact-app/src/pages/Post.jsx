@@ -13,7 +13,7 @@ function Post() {
         { comment: newComment, PostId: id },
         {
           headers: {
-            accessToken: sessionStorage.getItem("accessToken"),
+            accessToken: localStorage.getItem("accessToken"),
           },
         },
       )
@@ -64,7 +64,7 @@ function Post() {
           {comments.map((comment, key) => {
             return (
               <div key={key} className="px-5 py-2 m-2 bg-gray-500">
-                {comment.comment}
+                {comment.comment} {comment.username}
               </div>
             );
           })}
