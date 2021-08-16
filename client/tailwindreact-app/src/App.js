@@ -4,6 +4,7 @@ import Headbar from "./Component/Headbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Post from "./pages/Post";
+import Profile from "./pages/Profile";
 import Registration from "./pages/Registration";
 
 import TwitSupport from "./pages/TwitSupport";
@@ -26,6 +27,10 @@ function App() {
           </Route>
           <Route path="/auth" exact>
             <Registration/>
+          </Route>
+          <Route path="/profile" exact>
+            <Headbar/>
+            <Profile/>
           </Route>
           <Route path="/auth/login" exact><Login/></Route>
           <Route path="/post/:id" exact>

@@ -21,6 +21,7 @@ function Post() {
         if (response.data.error) {
           
           console.log(response.data.error);
+          alert("User must be login");
         } else {
           const commentToAdd = { comment: newComment };
           setComments([...comments, commentToAdd]);

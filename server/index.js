@@ -84,6 +84,23 @@ app.post("/auth/login",async (req,res)=>{
         });
     
 });
+
+//header username
+app.get("/username",validateToken, async (req,res)=>{
+    const userName=req.body;
+    const username=req.user.username;
+    userName.username=username;
+    res.json(userName);
+});
+//profile 
+app.get("/profile",validateToken,async(req,res)=>{
+    
+    const username=req.user.username;
+    const user=await Users.findOne({where:{username:username}});
+   
+    res.json(user);
+    
+})
 db.sequelize.sync().then(()=>{
     app.listen(3001,function(){
         console.log("Server is running on port 3001");
