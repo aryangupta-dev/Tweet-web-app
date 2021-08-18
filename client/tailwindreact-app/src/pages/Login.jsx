@@ -53,6 +53,7 @@ function Login() {
           <input
             name="password"
             placeholder="Example Dog.lov3r .. "
+            type="password"
             className="px-3 py-2 my-2 border border-white rounded-lg lg:px-6"
             onChange={(event) => {
               setPassword(event.target.value);

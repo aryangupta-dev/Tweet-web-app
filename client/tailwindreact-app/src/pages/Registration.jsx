@@ -74,6 +74,7 @@ function Registration() {
           />
           <Field
             name="password"
+            type="password"
             placeholder="Example Dog.lov3r .. "
             className="px-3 py-2 my-2 border border-white rounded-lg lg:px-6"
           />

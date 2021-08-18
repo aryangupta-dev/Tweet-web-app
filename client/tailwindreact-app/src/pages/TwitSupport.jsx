@@ -29,7 +29,7 @@ function TwitSupport() {
           );
           resetForm();
           history.push("/posts");} 
-          alert("User must be login");
+          
       });
    
   };

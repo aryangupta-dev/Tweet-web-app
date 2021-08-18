@@ -51,7 +51,7 @@ function Post() {
             <h1 className=" font-staatliches">{postObject.username}</h1>
           </div>
           <p className="mx-auto my-4 text-lg"> {postObject.title}</p>
-          <div className="pl-5 font-mono font-semibold text-blue-600">
+          <div className="font-mono font-semibold text-blue-600 sm:pl-5">
             {postObject.hashtag}
           </div>
           <div className="mt-2 text-gray-400">{postObject.createdAt}</div>
