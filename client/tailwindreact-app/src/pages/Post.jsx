@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router";
+import { useHistory } from "react-router-dom";
 function Post() {
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   let { id } = useParams();
   const [postObject, setPostObject] = useState({});
+  const [own, setOwn] = useState(false);
+  const [loggeduser, setLoggeduser] = useState([]);
+  let history=useHistory();
   const addComment = () => {
     axios
       .post(
@@ -15,29 +19,54 @@ function Post() {
           headers: {
             accessToken: localStorage.getItem("accessToken"),
           },
-        },
+        }
       )
       .then((response) => {
         if (response.data.error) {
-          
           console.log(response.data.error);
           alert("User must be login");
-        } else {
+        }else if(newComment==""){
+          alert("Comment field should not be empty");
+        }
+         else {
           const commentToAdd = { comment: newComment };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
       });
   };
+  const deleteComment=(id)=>{
+    
+    axios.delete(`http://localhost:3001/comments/${id}`).then((response)=>{
+    alert("Deleted Successfully");
+    setComments(
+      comments.filter((val) => {
+        return val.id != id;
+      })
+    );
+  });
+      
+   
+  };
+  
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
       setPostObject(response.data);
-     
     });
     axios.get(`http://localhost:3001/comments/${id}`).then((response) => {
       setComments(response.data);
     });
+    axios
+      .get(`http://localhost:3001/profile`, {
+        headers: {
+          accessToken: localStorage.getItem("accessToken"),
+        },
+      })
+      .then((response) => {
+        
+        setLoggeduser(response.data);
+      });
   }, [newComment]);
   return (
     <div className="flex flex-col md:flex-row ">
@@ -61,11 +90,23 @@ function Post() {
         <h1 className="px-4 py-2 mt-2 ml-2 font-mono text-base text-gray-700 border border-black rounded-lg md:text-2xl ">
           Comment Section
         </h1>
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col ">
           {comments.map((comment, key) => {
             return (
-              <div key={key} className="px-5 py-2 m-2 bg-gray-500">
-                {comment.comment} {comment.username}
+              <div
+                key={key}
+                className="px-5 py-2 m-2 text-lg border border-gray-300 font-nunito"
+              >
+                <h1>{comment.comment}</h1>{" "}
+                {comment.username == loggeduser.username ? (
+                  <button className="px-4 py-2 text-sm text-white bg-red-500 rounded-sm text white font-oswald"
+                  onClick={()=>{deleteComment(comment.id)}}>
+                    Delete
+                  </button>
+                ) : (<div className="flex flex-row m-2">
+                  <img src="https://image.flaticon.com/icons/png/24/1077/1077012.png" alt="" className="pr-2" />
+                  <h1 className="font-mono text-sm ">{comment.username}</h1></div>
+                )}
               </div>
             );
           })}
@@ -78,6 +119,7 @@ function Post() {
               setNewComment(event.target.value);
             }}
             value={newComment}
+            null=""
             type="text"
           ></input>
           <button

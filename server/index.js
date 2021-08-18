@@ -49,6 +49,15 @@ app.get("/comments/:postId",async (req,res)=>{
     res.json(comments);
 
 })
+app.delete("/comments/:id",async(req,res)=>{
+    const commentId=req.params.id;
+    console.log(commentId);
+    await Comments.destroy({where:{id:commentId}});
+
+    res.json("DELETED SUCCESSFULLY");
+    
+
+});
 
 // users database api
 
@@ -101,6 +110,7 @@ app.get("/profile",validateToken,async(req,res)=>{
     res.json(user);
     
 })
+
 db.sequelize.sync().then(()=>{
     app.listen(3001,function(){
         console.log("Server is running on port 3001");
