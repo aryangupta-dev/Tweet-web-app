@@ -25,7 +25,6 @@ function Login() {
           Stand <span className="text-black hover:text-pink-600">out be</span>{" "}
           original.
         </h1>
-        
 
         <div className="flex flex-col px-12 py-8 m-auto bg-gray-900 rounded-lg shadow-2xl lg:px-28 sm:px-20 sm:py-8 s md:right-12 lg:right-16 sm:top-16 lg:top-24">
           <div className="hidden mx-auto md:flex">
@@ -71,7 +70,7 @@ function Login() {
         </div>
       </div>
       <div className="flex flex-col-reverse items-center py-10 sm:flex-col">
-      <img
+        <img
           className="hidden mb-5 sm:flex animate-bounce"
           src="https://image.flaticon.com/icons/png/32/545/545678.png"
           alt="kcnjnxjm"
@@ -82,7 +81,7 @@ function Login() {
         >
           Sign up
         </button>
-        
+
         <h1 className="p-5 text-5xl border-yellow-500 sm:border-b-2 md:text-6xl font-staatliches">
           Register with us to use app
         </h1>

@@ -9,7 +9,7 @@ function Post() {
   const [postObject, setPostObject] = useState({});
   const [own, setOwn] = useState(false);
   const [loggeduser, setLoggeduser] = useState([]);
-  let history=useHistory();
+  let history = useHistory();
   const addComment = () => {
     axios
       .post(
@@ -25,30 +25,25 @@ function Post() {
         if (response.data.error) {
           console.log(response.data.error);
           alert("User must be login");
-        }else if(newComment==""){
+        } else if (newComment == "") {
           alert("Comment field should not be empty");
-        }
-         else {
+        } else {
           const commentToAdd = { comment: newComment };
           setComments([...comments, commentToAdd]);
           setNewComment("");
         }
       });
   };
-  const deleteComment=(id)=>{
-    
-    axios.delete(`http://localhost:3001/comments/${id}`).then((response)=>{
-    alert("Deleted Successfully");
-    setComments(
-      comments.filter((val) => {
-        return val.id != id;
-      })
-    );
-  });
-      
-   
+  const deleteComment = (id) => {
+    axios.delete(`http://localhost:3001/comments/${id}`).then((response) => {
+      alert("Deleted Successfully");
+      setComments(
+        comments.filter((val) => {
+          return val.id != id;
+        })
+      );
+    });
   };
-  
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
@@ -64,7 +59,6 @@ function Post() {
         },
       })
       .then((response) => {
-        
         setLoggeduser(response.data);
       });
   }, [newComment]);
@@ -99,13 +93,23 @@ function Post() {
               >
                 <h1>{comment.comment}</h1>{" "}
                 {comment.username == loggeduser.username ? (
-                  <button className="px-4 py-2 text-sm text-white bg-red-500 rounded-sm text white font-oswald"
-                  onClick={()=>{deleteComment(comment.id)}}>
+                  <button
+                    className="px-4 py-2 text-sm text-white bg-red-500 rounded-sm text white font-oswald"
+                    onClick={() => {
+                      deleteComment(comment.id);
+                    }}
+                  >
                     Delete
                   </button>
-                ) : (<div className="flex flex-row m-2">
-                  <img src="https://image.flaticon.com/icons/png/24/1077/1077012.png" alt="" className="pr-2" />
-                  <h1 className="font-mono text-sm ">{comment.username}</h1></div>
+                ) : (
+                  <div className="flex flex-row m-2">
+                    <img
+                      src="https://image.flaticon.com/icons/png/24/1077/1077012.png"
+                      alt=""
+                      className="pr-2"
+                    />
+                    <h1 className="font-mono text-sm ">{comment.username}</h1>
+                  </div>
                 )}
               </div>
             );

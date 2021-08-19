@@ -2,12 +2,12 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 function Profile() {
-  let history= useHistory();
+  let history = useHistory();
   const [user, setUser] = useState([]);
-  const logout=()=>{
+  const logout = () => {
     localStorage.removeItem("accessToken");
     history.push("/");
-  }
+  };
   useEffect(() => {
     axios
       .get("http://localhost:3001/profile", {
@@ -30,7 +30,9 @@ function Profile() {
         <h1 className="mt-5 mb-5 text-lg text-white border-b-2 border-white">
           {user.username}
         </h1>
-        <button onClick={logout} className="px-5 py-2 text-white bg-red-600">Log out</button>
+        <button onClick={logout} className="px-5 py-2 text-white bg-red-600">
+          Log out
+        </button>
       </div>
       <div className="w-screen h-screen bg-gradient-to-r from-purple-500 via-blue-300 to-yellow-300">
         <div className="my-5 sm:mx-14">
@@ -59,11 +61,16 @@ function Profile() {
         <div className="flex flex-col p-2 border border-white sm:mx-14">
           <p className="p-2 text-lg font-semibold ">Disclamier</p>
           <p className="text-white">*The time has the orirgin of USA.</p>
-          <p className="text-white">*This website is just for project, no commercial usage allow.</p>
-          <p className="text-white">*Registered user can use it just for fun.</p>
-         
+          <p className="text-white">
+            *This website is just for project, no commercial usage allow.
+          </p>
+          <p className="text-white">
+            *Registered user can use it just for fun.
+          </p>
         </div>
-        <footer className="flex flex-col items-center mt-10 mb-5 text-white">© 2021 All Rights Reserved.</footer>
+        <footer className="flex flex-col items-center mt-10 mb-5 text-white">
+          © 2021 All Rights Reserved.
+        </footer>
       </div>
     </div>
   );

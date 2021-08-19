@@ -23,15 +23,14 @@ function TwitSupport() {
       })
       .then((response) => {
         console.log(response.data);
-        if(!response.data.error){
-        alert(
+        if (!response.data.error) {
+          alert(
             "Support added to hashtag section.Go to home page to see your support"
           );
           resetForm();
-          history.push("/posts");} 
-          
+          history.push("/posts");
+        }
       });
-   
   };
   const validationSchema = Yup.object().shape({
     title: Yup.string().min(40).max(60).required("You must input a Title!"),
