@@ -10,7 +10,8 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 //posts database api
-app.get("/posts", async function (req, res) {
+app.get("/posts",validateToken, async function (req, res) {
+  
   const listofPosts = await Posts.findAll({ include: [Likes] });
   res.json(listofPosts);
 });

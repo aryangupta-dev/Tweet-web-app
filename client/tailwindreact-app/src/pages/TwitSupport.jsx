@@ -22,13 +22,16 @@ function TwitSupport() {
         },
       })
       .then((response) => {
-        console.log(response.data);
+        
         if (!response.data.error) {
           alert(
             "Support added to hashtag section.Go to home page to see your support"
           );
           resetForm();
           history.push("/posts");
+        }else{
+          alert("User must be login");
+          history.push("/");
         }
       });
   };

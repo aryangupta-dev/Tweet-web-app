@@ -65,7 +65,7 @@ function Post() {
   return (
     <div className="flex flex-col md:flex-row ">
       <div className="min-h-full p-10 bg-gray-900 md:w-1/2 md:min-h-screen">
-        <div className="flex flex-col max-w-sm px-5 py-10 mx-auto bg-white rounded-lg md:px-3 md:mt-16 md:fixed lg:ml-16 sm:l-5">
+        <div className="flex flex-col max-w-sm px-5 py-10 mx-auto bg-white rounded-lg md:px-3 md:mt-16 md:fixed lg:ml-16 sm:l-5 md:flex-wrap flex-nowrap">
           <div className="flex flex-row text-gray-600 border-b border-gray-300">
             <img
               src="https://image.flaticon.com/icons/png/16/733/733579.png"

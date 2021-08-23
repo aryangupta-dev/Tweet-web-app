@@ -16,7 +16,12 @@ function Profile() {
         },
       })
       .then((response) => {
-        setUser(response.data);
+        if(!response.data.error){
+        setUser(response.data);}
+        else{
+          alert("User must be login ");
+          history.push("/");
+        }
       });
   }, []);
   return (

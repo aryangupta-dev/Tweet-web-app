@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import Headbar from "./Component/Headbar";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import PageNotFound from "./pages/PageNotFound";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import Registration from "./pages/Registration";
@@ -21,7 +22,7 @@ function App() {
             <Headbar />
             <TwitSupport />
           </Route>
-          <Route path="/posts">
+          <Route path="/posts" exact>
             <Headbar />
             <Home />
           </Route>
@@ -36,6 +37,9 @@ function App() {
           <Route path="/post/:id" exact>
             <Headbar/>
             <Post/>
+          </Route>
+          <Route path="*" >
+            <PageNotFound/>
           </Route>
         </Switch>
       </BrowserRouter>

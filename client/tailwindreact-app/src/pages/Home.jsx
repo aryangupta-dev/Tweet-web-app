@@ -11,6 +11,7 @@ function Home() {
         accessToken: localStorage.getItem("accessToken"),
       },
     }).then((response)=>{
+      console.log(response.data)
         setListOfPosts(listOfPosts.map((post)=>{
           if(post.id===postId){
             if(response.data.liked){
@@ -30,8 +31,16 @@ function Home() {
   };
 
   useEffect(() => {
-    axios.get("http://localhost:3001/posts").then((response) => {
-      setListOfPosts(response.data.reverse());
+    axios.get("http://localhost:3001/posts",{
+      headers: {
+        accessToken: localStorage.getItem("accessToken"),
+      },
+    }).then((response) => {
+      if(!response.data.error){
+      setListOfPosts(response.data.reverse());}
+      else{
+        history.push("/");
+      }
     });
   }, []);
 
@@ -68,7 +77,7 @@ function Home() {
               {value.hashtag}
             </div>
             <div className="flex flex-row items-end" >
-            <button className="mr-5"  onClick={()=>{likeButton(value.id)}} >👍</button>
+            <button className="mr-5"  onClick={()=>{likeButton(value.id)}}  >👍</button>
             <label >{value.Likes.length}</label>
             </div>
             <div className="mt-2 text-gray-400">{value.createdAt}</div>
