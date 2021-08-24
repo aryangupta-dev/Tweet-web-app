@@ -6,6 +6,32 @@
  Separate page for particular user posts.
  Deleting of the post and the comment section also included.
  For login authentication used Jsonwebtoken.
+ The site is a responsive site.
+ 
+## Login page
+![image](https://user-images.githubusercontent.com/68029308/130680937-3b9611b9-3788-4ecb-b5ba-10f1393394c0.png)
+
+
+## Signup page
+![image](https://user-images.githubusercontent.com/68029308/130681017-b2bfbfcf-3208-41f2-ad74-2137f30d077f.png)
+
+## Dashboard
+![image](https://user-images.githubusercontent.com/68029308/130681210-c96779da-cd08-4d6d-885c-cbbc886b8f96.png)
+
+## Particular post comment section and user delete post section.
+![image](https://user-images.githubusercontent.com/68029308/130681465-22816ce3-5026-4b60-8a8c-60fb7d6a0dd1.png)
+
+![image](https://user-images.githubusercontent.com/68029308/130681554-4e49aa59-0693-4516-9bfd-4548c349c117.png)
+
+## Post creation section
+![image](https://user-images.githubusercontent.com/68029308/130681647-46116ab0-0f3a-43e4-8852-e0873a0bb6a0.png)
+
+## User dashboard of their posts
+![image](https://user-images.githubusercontent.com/68029308/130681781-7cb5f811-435c-49a7-9a18-52ee152121d2.png)
+
+## Profile page of the user
+![image](https://user-images.githubusercontent.com/68029308/130681847-ae03b39b-e156-43be-8fd5-cb1ed51b62db.png)
+
 
 
 # Getting Started with Create React App
