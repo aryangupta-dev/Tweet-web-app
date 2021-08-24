@@ -33,6 +33,8 @@ app.get("/posts/byId/:id", async (req, res) => {
 app.delete("/deletepost/:id",async function(req,res){
   const postId=req.params.id;
   const post=await Posts.destroy({where:{id:postId}});
+  await Comments.destroy({where:{PostId:postId}});
+  await Likes.destroy({where:{PostId:postId}});
   res.json(post);
 
 

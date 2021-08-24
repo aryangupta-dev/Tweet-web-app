@@ -86,7 +86,7 @@ function Post() {
           <div className="flex flex-row justify-between">
             
           <h1 className="mt-2 text-gray-400">{postObject.createdAt}</h1>
-          {loggeduser.username===postObject.username && <button onClick={()=>deletePost(postObject.id)}><img src="https://image.flaticon.com/icons/png/32/1214/1214428.png" alt="" /></button>}
+          {loggeduser.username===postObject.username && <button  className="p-2 rounded-sm hover:bg-blue-200" onClick={()=>deletePost(postObject.id)}><img  src="https://image.flaticon.com/icons/png/32/1214/1214428.png" alt="" /></button>}
           </div>
         </div>
       </div>

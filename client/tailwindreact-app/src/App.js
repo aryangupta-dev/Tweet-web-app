@@ -7,6 +7,7 @@ import PageNotFound from "./pages/PageNotFound";
 import Post from "./pages/Post";
 import Profile from "./pages/Profile";
 import Registration from "./pages/Registration";
+import YourPosts from "./pages/YourPosts";
 
 import TwitSupport from "./pages/TwitSupport";
 
@@ -32,6 +33,10 @@ function App() {
           <Route path="/profile" exact>
             <Headbar/>
             <Profile/>
+          </Route>
+          <Route path="/userposts" exact>
+            <Headbar/>
+            <YourPosts/>
           </Route>
           <Route path="/auth/login" exact><Login/></Route>
           <Route path="/post/:id" exact>

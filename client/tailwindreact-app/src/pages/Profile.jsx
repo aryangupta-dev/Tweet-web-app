@@ -16,9 +16,9 @@ function Profile() {
         },
       })
       .then((response) => {
-        if(!response.data.error){
-        setUser(response.data);}
-        else{
+        if (!response.data.error) {
+          setUser(response.data);
+        } else {
           alert("User must be login ");
           history.push("/");
         }
@@ -26,7 +26,8 @@ function Profile() {
   }, []);
   return (
     <div className="flex flex-col sm:flex-row">
-      <div className="flex flex-col items-center w-screen bg-gray-700 sm:w-64 ">
+      <div className="flex flex-col w-screen bg-gray-700 sm:w-64 ">
+        <div className="flex flex-col items-center ">
         <img
           src="https://image.flaticon.com/icons/png/128/2922/2922510.png"
           alt=""
@@ -38,6 +39,13 @@ function Profile() {
         <button onClick={logout} className="px-5 py-2 text-white bg-red-600">
           Log out
         </button>
+        </div>
+        <div className="flex flex-row items-start mt-5 text-white border-2 border-white sm:w-64 hover:bg-red-300 w-80" >
+          <a  href="/userposts" className="py-2 pl-12 text-lg sm:pl-4">Your posts</a>
+        </div>
+        <div className="flex flex-row items-center mb-5 text-white border-2 border-white sm:w-64 hover:bg-red-300 w-80" >
+          <a  href="/updatepassword" className="py-2 pl-12 text-lg sm:pl-4">Update password</a>
+        </div>
       </div>
       <div className="w-screen h-screen bg-gradient-to-r from-purple-500 via-blue-300 to-yellow-300">
         <div className="my-5 sm:mx-14">
