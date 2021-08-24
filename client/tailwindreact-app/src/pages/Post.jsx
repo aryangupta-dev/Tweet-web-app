@@ -44,6 +44,12 @@ function Post() {
       );
     });
   };
+  const deletePost=(postId)=>{
+    axios.delete(`http://localhost:3001/deletepost/${postId}`).then((response)=>{
+      alert("Deleted sucessfully");
+      history.push("/posts");
+    });
+  }
 
   useEffect(() => {
     axios.get(`http://localhost:3001/posts/byId/${id}`).then((response) => {
@@ -77,7 +83,11 @@ function Post() {
           <div className="font-mono font-semibold text-blue-600 sm:pl-5">
             {postObject.hashtag}
           </div>
-          <div className="mt-2 text-gray-400">{postObject.createdAt}</div>
+          <div className="flex flex-row justify-between">
+            
+          <h1 className="mt-2 text-gray-400">{postObject.createdAt}</h1>
+          {loggeduser.username===postObject.username && <button onClick={()=>deletePost(postObject.id)}><img src="https://image.flaticon.com/icons/png/32/1214/1214428.png" alt="" /></button>}
+          </div>
         </div>
       </div>
       <div className="flex flex-col items-start w-1/2 min-h-full md:min-h-screen">

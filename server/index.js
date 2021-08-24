@@ -29,6 +29,14 @@ app.get("/posts/byId/:id", async (req, res) => {
 
   res.json(post);
 });
+//
+app.delete("/deletepost/:id",async function(req,res){
+  const postId=req.params.id;
+  const post=await Posts.destroy({where:{id:postId}});
+  res.json(post);
+
+
+});
 
 //comments database api
 app.post("/comments", validateToken, async (req, res) => {
