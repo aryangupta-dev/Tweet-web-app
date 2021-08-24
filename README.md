@@ -1,3 +1,13 @@
+# Tweet app,this is a web app which is build using Reactjs and Node js.
+# For database Mysql is used.
+ In this major project n numbers of user can registered with us and can login to their separate accounts.
+ In which they can post their tweet on the dashboard which also includes liking and commenting section for other user.
+ Profile page also included.
+ Separate page for particular user posts.
+ Deleting of the post and the comment section also included.
+ For login authentication used Jsonwebtoken.
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
