@@ -7,7 +7,7 @@ function Post() {
   const [newComment, setNewComment] = useState("");
   let { id } = useParams();
   const [postObject, setPostObject] = useState({});
-  const [own, setOwn] = useState(false);
+  
   const [loggeduser, setLoggeduser] = useState([]);
   let history = useHistory();
   const addComment = () => {

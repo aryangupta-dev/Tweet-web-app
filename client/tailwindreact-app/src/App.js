@@ -10,6 +10,7 @@ import Registration from "./pages/Registration";
 import YourPosts from "./pages/YourPosts";
 
 import TwitSupport from "./pages/TwitSupport";
+import UpdatePassword from "./pages/UpdatePassword";
 
 function App() {
   return (
@@ -34,7 +35,7 @@ function App() {
             <Headbar/>
             <Profile/>
           </Route>
-          <Route path="/userposts" exact>
+          <Route path="/userposts/:id" exact>
             <Headbar/>
             <YourPosts/>
           </Route>
@@ -42,6 +43,10 @@ function App() {
           <Route path="/post/:id" exact>
             <Headbar/>
             <Post/>
+          </Route>
+          <Route path="/changepassword" exact>
+            <Headbar/>
+            <UpdatePassword/>
           </Route>
           <Route path="*" >
             <PageNotFound/>

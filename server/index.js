@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const { Posts, Comments, Users ,Likes} = require("./models");
+const { Posts, Comments, Users, Likes } = require("./models");
 const cors = require("cors");
 app.use(cors());
 app.use(express.json());
@@ -10,14 +10,15 @@ const bcrypt = require("bcrypt");
 const { sign } = require("jsonwebtoken");
 
 //posts database api
-app.get("/posts",validateToken, async function (req, res) {
-  
+app.get("/posts", validateToken, async function (req, res) {
   const listofPosts = await Posts.findAll({ include: [Likes] });
   res.json(listofPosts);
 });
 app.post("/posts", validateToken, async function (req, res) {
   const post = req.body;
+  const userId = req.user.id;
   const username = req.user.username;
+  post.UserId=userId;
   post.username = username;
   await Posts.create(post);
   res.json(post);
@@ -29,15 +30,24 @@ app.get("/posts/byId/:id", async (req, res) => {
 
   res.json(post);
 });
-//
-app.delete("/deletepost/:id",async function(req,res){
-  const postId=req.params.id;
-  const post=await Posts.destroy({where:{id:postId}});
-  await Comments.destroy({where:{PostId:postId}});
-  await Likes.destroy({where:{PostId:postId}});
+// delete post
+app.delete("/deletepost/:id", async function (req, res) {
+  const postId = req.params.id;
+  const post = await Posts.destroy({ where: { id: postId } });
+  await Comments.destroy({ where: { PostId: postId } });
+  await Likes.destroy({ where: { PostId: postId } });
   res.json(post);
-
-
+});
+//your posts
+app.get("/userposts/:id", validateToken, async function (req, res) {
+  const userId = req.params.id;
+  console.log(userId);
+  const listofPosts = await Posts.findAll(
+    { where: { UserId: userId } ,
+    include: [Likes] }
+  );
+  
+  res.json(listofPosts);
 });
 
 //comments database api
@@ -97,12 +107,36 @@ app.post("/auth/login", async (req, res) => {
   });
 });
 
+app.put("/changepassword",validateToken,async(req,res)=>{
+        const{currentPassword,newPassword}=req.body;
+        console.log(req.body);
+        const user= await Users.findOne({where:{username:req.user.username}});
+        bcrypt.compare(currentPassword, user.password).then(async (match) => {
+          if (!match) {
+            res.json({ error: "Password is incorrect" });
+          }
+          bcrypt.hash(newPassword, 10).then((hash) => {
+            Users.update({password:hash},{where:{ username: req.user.username}});
+            res.json("Success");
+          });
+      
+          
+        });
+
+
+});
+
 //header username
 app.get("/username", validateToken, async (req, res) => {
   const userName = req.body;
   const username = req.user.username;
   userName.username = username;
   res.json(userName);
+});
+app.get("/userId", validateToken, async (req, res) => {
+  const userId = req.user.id;
+
+  res.json(userId);
 });
 //profile
 app.get("/profile", validateToken, async (req, res) => {
@@ -113,15 +147,17 @@ app.get("/profile", validateToken, async (req, res) => {
 });
 // likes api
 app.post("/likes", validateToken, async (req, res) => {
-  const {PostId} = req.body;
+  const { PostId } = req.body;
   const UserId = req.user.id;
-  const found=await  Likes.findOne({where:{PostId:PostId,UserId:UserId},});
-  if(!found){
-      await Likes.create({PostId:PostId,UserId:UserId});
-      res.json({liked:true});
-  }else{
-      await Likes.destroy({where:{PostId:PostId,UserId:UserId},});
-      res.json({liked:false});
+  const found = await Likes.findOne({
+    where: { PostId: PostId, UserId: UserId },
+  });
+  if (!found) {
+    await Likes.create({ PostId: PostId, UserId: UserId });
+    res.json({ liked: true });
+  } else {
+    await Likes.destroy({ where: { PostId: PostId, UserId: UserId } });
+    res.json({ liked: false });
   }
 });
 

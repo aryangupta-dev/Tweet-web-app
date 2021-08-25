@@ -27,7 +27,7 @@ function Registration() {
       .min(8)
       .max(15)
       .required("You must input a Strong password!"),
-    phoneNo: Yup.string()
+    phoneNo: Yup.number()
       .min(10)
       .max(10)
       .required("Please enter the valid phone no"),
