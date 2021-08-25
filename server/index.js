@@ -6,8 +6,9 @@ app.use(cors());
 app.use(express.json());
 const db = require("./models");
 const { validateToken } = require("./middlewares/AuthMiddleware");
-const bcrypt = require("bcrypt");
+const bcrypt = require("bcryptjs");
 const { sign } = require("jsonwebtoken");
+require("dotenv").config();
 
 //posts database api
 app.get("/posts", validateToken, async function (req, res) {
@@ -18,7 +19,7 @@ app.post("/posts", validateToken, async function (req, res) {
   const post = req.body;
   const userId = req.user.id;
   const username = req.user.username;
-  post.UserId=userId;
+  post.UserId = userId;
   post.username = username;
   await Posts.create(post);
   res.json(post);
@@ -42,11 +43,11 @@ app.delete("/deletepost/:id", async function (req, res) {
 app.get("/userposts/:id", validateToken, async function (req, res) {
   const userId = req.params.id;
   console.log(userId);
-  const listofPosts = await Posts.findAll(
-    { where: { UserId: userId } ,
-    include: [Likes] }
-  );
-  
+  const listofPosts = await Posts.findAll({
+    where: { UserId: userId },
+    include: [Likes],
+  });
+
   res.json(listofPosts);
 });
 
@@ -107,23 +108,22 @@ app.post("/auth/login", async (req, res) => {
   });
 });
 
-app.put("/changepassword",validateToken,async(req,res)=>{
-        const{currentPassword,newPassword}=req.body;
-        console.log(req.body);
-        const user= await Users.findOne({where:{username:req.user.username}});
-        bcrypt.compare(currentPassword, user.password).then(async (match) => {
-          if (!match) {
-            res.json({ error: "Password is incorrect" });
-          }
-          bcrypt.hash(newPassword, 10).then((hash) => {
-            Users.update({password:hash},{where:{ username: req.user.username}});
-            res.json("Success");
-          });
-      
-          
-        });
-
-
+app.put("/changepassword", validateToken, async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+  console.log(req.body);
+  const user = await Users.findOne({ where: { username: req.user.username } });
+  bcrypt.compare(currentPassword, user.password).then(async (match) => {
+    if (!match) {
+      res.json({ error: "Password is incorrect" });
+    }
+    bcrypt.hash(newPassword, 10).then((hash) => {
+      Users.update(
+        { password: hash },
+        { where: { username: req.user.username } }
+      );
+      res.json("Success");
+    });
+  });
 });
 
 //header username
@@ -162,7 +162,9 @@ app.post("/likes", validateToken, async (req, res) => {
 });
 
 db.sequelize.sync().then(() => {
-  app.listen(3001, function () {
+  app.listen(process.env.PORT||3001, function () {
     console.log("Server is running on port 3001");
   });
+}).catch((err)=>{
+  console.log(err);
 });
